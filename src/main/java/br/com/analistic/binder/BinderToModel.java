@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import br.com.analistic.model.ClienteModel;
 import br.com.analistic.model.ProdutoModel;
 import br.com.analistic.model.VendaModel;
-import br.com.analistic.model.VendaModel;
 import br.com.analistic.model.VendedorModel;
 
 public class BinderToModel {

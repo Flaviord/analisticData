@@ -41,7 +41,6 @@ public class Operation {
 							.build());				
 			}
 		}
-		//venda.stream().forEach(a -> System.out.println(a.getTotalVEnda() +" "+a.getSaleId()+" "+a.getName()));
 		this.idVendaMaisCara = maiorVenda(venda).getSaleId();
 		this.piorVendedor = piorVendedor(venda).getName();
 	}

@@ -2,7 +2,6 @@ package br.com.analistic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,33 +17,36 @@ public class AnalisticDataApplication {
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(AnalisticDataApplication.class, args);
-		
+	
+		while (true) {
+	
 		List<Object> object = new ArrayList<>();
 		
-		String arquivoEntrada = System.getenv().get("HOME")+"/Sources/";
-		String arquivoSaida = System.getenv().get("HOME")+"/Sources/";
+		String arquivoEntrada = System.getenv().get("HOME")+"/data/in/";
 		
 		List<Path> filePaths = new ArrayList<>();
 		filePaths = ReadFile.filePathList(arquivoEntrada);
-		//ReadFile.arquivoData(filePaths);
-		System.out.println("file paths->"+filePaths);
 		
-		List<Path> filteredPaths = ReadFile.arquivoData(filePaths);
-		filteredPaths.forEach(a -> ReadFile.readLines(a).stream().forEach(line ->  {object.add(BinderToModel.binderToModel(line));}));
-		System.out.println("filtered->"+filteredPaths);
+		if (!filePaths.isEmpty()) {
+			List<Path> filteredPaths = ReadFile.arquivoData(filePaths);
+			
+			for (Path pathFilesFiltered : filteredPaths) {
+				
+				ReadFile.readLines(pathFilesFiltered).stream().forEach(line -> object.add(BinderToModel.binderToModel(line)));
+				
+				Operation operacoes = new Operation();
+				operacoes.verificaInstancia(object);
+				ReadFile.writeLines(pathFilesFiltered,operacoes);
+			}
+		}
+
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		
-		//object.stream().forEach(a -> System.out.println(a));
-		
-		Operation operacoes = new Operation();
-		operacoes.verificaInstancia(object);
-		System.out.println("Total Clientes->"+operacoes.getTotalCliente());
-		System.out.println("Total Vendendor->"+operacoes.getTotalVendedor());
-		System.out.println("Maior Venda ->"+operacoes.getIdVendaMaisCara());
-		System.out.println("Pior Vendedor->"+operacoes.getNamePiorVendedor());
-		
-		
-		ReadFile.writeLines(Paths.get(arquivoSaida));
-		   
+		}
 		
 	}
 }
