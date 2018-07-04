@@ -7,6 +7,27 @@ public class ProdutoModel {
 	private Integer itemQuantidade;
 	private BigDecimal itemPrice;
 	
+	
+	
+	public Integer getItemId() {
+		return itemId;
+	}
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
+	public Integer getItemQuantidade() {
+		return itemQuantidade;
+	}
+	public void setItemQuantidade(Integer itemQuantidade) {
+		this.itemQuantidade = itemQuantidade;
+	}
+	public BigDecimal getItemPrice() {
+		return itemPrice;
+	}
+	public void setItemPrice(BigDecimal itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+	
 	public static class Builder {
 		private Integer itemId;
 		private Integer itemQuantidade;

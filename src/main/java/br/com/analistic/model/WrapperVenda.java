@@ -4,12 +4,32 @@ import java.math.BigDecimal;
 
 public class WrapperVenda {
 	private String name;
-	private Integer itemId;
+	private Integer saleId;
 	private BigDecimal totalVEnda;
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getSaleId() {
+		return saleId;
+	}
+	public void setSaleId(Integer saleId) {
+		this.saleId = saleId;
+	}
+	public BigDecimal getTotalVEnda() {
+		return totalVEnda;
+	}
+	public void setTotalVEnda(BigDecimal totalVEnda) {
+		this.totalVEnda = totalVEnda;
+	}
 	
 	public static class Builder {
 		private String name;
-		private Integer itemId;
+		private Integer saleId;
 		private BigDecimal totalVEnda;
 		
 		public Builder name(String val) {
@@ -22,8 +42,8 @@ public class WrapperVenda {
 			return this;
 		}
 		
-		public Builder itemId(Integer val) {
-			this.itemId = val;
+		public Builder saleId(Integer val) {
+			this.saleId = val;
 			return this;
 		}
 		public WrapperVenda build() {
@@ -32,7 +52,7 @@ public class WrapperVenda {
 	}
 	private WrapperVenda(Builder builder) {
 		this.name = builder.name;
-		this.itemId = builder.itemId;
+		this.saleId = builder.saleId;
 		this.totalVEnda = builder.totalVEnda;
 	}
 	

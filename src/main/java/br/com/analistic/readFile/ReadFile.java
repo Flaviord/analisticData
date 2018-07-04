@@ -33,4 +33,13 @@ public class ReadFile {
 		}
 		return null;
 	}
+	
+	public static void writeLines(Path path) {
+		Charset charset = Charset.forName("UTF-8");
+		try {
+			Files.write(path, "novo dado".getBytes());
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+	}
 }

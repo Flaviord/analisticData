@@ -2,6 +2,7 @@ package br.com.analistic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.analistic.binder.BinderToModel;
-import br.com.analistic.model.VendaModel;
 import br.com.analistic.operation.Operation;
 import br.com.analistic.readFile.ReadFile;
 
@@ -26,17 +26,24 @@ public class AnalisticDataApplication {
 		
 		List<Path> filePaths = new ArrayList<>();
 		filePaths = ReadFile.filePathList(arquivoEntrada);
-		ReadFile.arquivoData(filePaths);
+		//ReadFile.arquivoData(filePaths);
+		System.out.println("file paths->"+filePaths);
 		
 		List<Path> filteredPaths = ReadFile.arquivoData(filePaths);
-		filteredPaths.forEach(a -> ReadFile.readLines(a).stream().forEach(line ->  object.add(BinderToModel.binderToModel(line))));
+		filteredPaths.forEach(a -> ReadFile.readLines(a).stream().forEach(line ->  {object.add(BinderToModel.binderToModel(line));}));
+		System.out.println("filtered->"+filteredPaths);
 		
-		object.stream().forEach(a -> System.out.println(a));
+		//object.stream().forEach(a -> System.out.println(a));
 		
 		Operation operacoes = new Operation();
 		operacoes.verificaInstancia(object);
 		System.out.println("Total Clientes->"+operacoes.getTotalCliente());
 		System.out.println("Total Vendendor->"+operacoes.getTotalVendedor());
+		System.out.println("Maior Venda ->"+operacoes.getIdVendaMaisCara());
+		System.out.println("Pior Vendedor->"+operacoes.getNamePiorVendedor());
+		
+		
+		ReadFile.writeLines(Paths.get(arquivoSaida));
 		   
 		
 	}
